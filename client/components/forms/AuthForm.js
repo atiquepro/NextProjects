@@ -1,0 +1,94 @@
+import { SyncOutlined } from "@ant-design/icons"
+
+const AuthForm = ({
+    handleClick,
+    name,
+    setName,
+    email,
+    setEmail,
+    password,
+    setPassword,
+    secret,
+    setSecret,
+    loading,
+    page
+}) =>(
+        <form onSubmit={handleClick}>
+           {page !== "login" && (<div className="form-group p-2">
+                <small>
+                    <label className="text-muted">Your name</label>
+                </small>
+                <input 
+                    value={name}
+                    onChange={e => setName(e.target.value)}
+                    type="text" 
+                    className="form-control" 
+                    placeholder="Enter name" 
+                />
+            </div>)}
+
+            <div className="form-group p-2">
+                <small>
+                    <label className="text-muted">Email Address</label>
+                </small>
+                <input
+                    value={email}
+                    onChange={e => setEmail(e.target.value)} 
+                    type="email" 
+                    className="form-control" 
+                    placeholder="Enter email address" 
+                />
+            </div>
+
+            <div className="form-group p-2">
+                <small>
+                    <label className="text-muted">Password</label>
+                </small>
+                <input 
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    type="password" 
+                    className="form-control" 
+                    placeholder="Enter password" 
+                />
+            </div>
+
+          {page !== "login" &&  (<>
+
+            <div className="form-group p-2">
+                <small>
+                    <label className="text-muted">Pick a question</label>
+                </small>
+                <select className="form-control">
+                    <option>what's your favorite color?</option>
+                    <option>what's your bestfriend's name?</option>
+                    <option>what city you were born?</option>
+                </select>
+                <small className="form-text text-muted">
+                    you can use this if you forget your password
+                </small>
+            </div>
+
+            <div className="form-group p-2">
+                <input 
+                    value={secret}
+                    onChange={e => setSecret(e.target.value)}
+                    type="text"
+                    className="form-control"
+                    placeholder="Write your answer here" 
+                />
+            </div>
+
+            </>)}
+            <div className="form-group p-2">
+                <button disabled={page === "login" ? !email || !password : !name || !email || !password || !secret} className="btn btn-primary col-12">
+                    {loading ? <SyncOutlined spin className="py-1"/> : "Submit"}
+                </button>
+            </div>
+            
+        </form>
+    )
+        
+
+
+export default AuthForm
